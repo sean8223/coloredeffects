@@ -1,0 +1,22 @@
+{
+    "name": "coloredeffects",
+    "title": "Colored Effects",
+    "description": "Adds settings to control the display of status and overlay icons on tokens",
+    "author": "Sean Wellington",
+    "version": "0.0.1",
+    "minimumCoreVersion": "0.6.5",
+    "compatibleCoreVersion": "0.6.5",
+    "esmodules": [
+	"module/coloredeffects.js"
+    ],
+    "languages": [
+	{
+	    "lang": "en",
+	    "name": "English",
+	    "path": "lang/en.json"
+	}
+    ],
+    "url": "https://github.com/sean8223/coloredeffects",
+    "manifest": "https://raw.githubusercontent.com/sean8223/coloredeffects/master/module.json",
+    "download": "https://github.com/sean8223/coloredeffects/releases/latest/download/coloredeffects.zip"
+}

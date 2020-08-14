@@ -1,0 +1,18 @@
+{
+    "coloredeffects.overlayColor.name": "Overlay Icon Color",
+    "coloredeffects.overlayColor.hint": "Color for overlay icons as a hex string (rrggbb)",
+    "coloredeffects.overlayAlpha.name": "Overlay Icon Opacity",
+    "coloredeffects.overlayAlpha.hint": "Opacity of overlay icons (0 = fully transparent, 1 = fully opaque)",
+    "coloredeffects.statusBackgroundColor.name": "Status Icon Background Color",
+    "coloredeffects.statusBackgroundColor.hint": "Background color of status icons as a hex string (rrggbb)",
+    "coloredeffects.statusBackgroundAlpha.name": "Status Icon Background Opacity",
+    "coloredeffects.statusBackgroundAlpha.hint": "Opacity of status icon background (0 = fully transparent, 1 = fully opaque)",
+    "coloredeffects.statusBorderColor.name": "Status Icon Border Color",
+    "coloredeffects.statusBorderColor.hint": "Color of status icon border as a hex string (rrggbb)",
+    "coloredeffects.statusBorderWidth.name": "Status Icon Border Width",
+    "coloredeffects.statusBorderWidth.hint": "Width in pixels of status icon border",
+    "coloredeffects.statusColor.name": "Status Icon Color",
+    "coloredeffects.statusColor.hint": "Color for status icons as a hex string (rrggbb)",
+    "coloredeffects.statusAlpha.name": "Status Icon Opacity",
+    "coloredeffects.statusAlpha.hint": "Opacity of status icons (0 = fully transparent, 1 = fully opaque)"
+}

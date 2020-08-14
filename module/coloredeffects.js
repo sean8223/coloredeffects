@@ -1,0 +1,134 @@
+Token.prototype.drawEffects = async function() {
+
+    this.effects.removeChildren().forEach(c => c.destroy());
+
+    // Draw status effects
+    if (this.data.effects.length > 0 ) {
+
+	// Determine the grid sizing for each effect icon
+	let w = Math.round(canvas.dimensions.size / 2 / 5) * 2;
+
+	// Draw a background Graphics object
+	let bgColor = colorStringToHex(game.settings.get("coloredeffects", "statusBackgroundColor"));
+	let bgAlpha = game.settings.get("coloredeffects", "statusBackgroundAlpha");
+	let bgBorderWidth = game.settings.get("coloredeffects", "statusBorderWidth");
+	let bgBorderColor = colorStringToHex(game.settings.get("coloredeffects", "statusBorderColor"));
+	let bg = this.effects.addChild(new PIXI.Graphics()).beginFill(bgColor, bgAlpha).lineStyle(bgBorderWidth, bgBorderColor);
+
+	// Draw each effect icon
+	let statusColor = colorStringToHex(game.settings.get("coloredeffects", "statusColor"));
+	let statusAlpha = game.settings.get("coloredeffects", "statusAlpha");
+	for ( let [i, src] of this.data.effects.entries() ) {
+            let tex = await loadTexture(src);
+            let icon = this.effects.addChild(new PIXI.Sprite(tex));
+            icon.width = icon.height = w;
+            icon.x = Math.floor(i / 5) * w;
+            icon.y = (i % 5) * w;
+            icon.tint = statusColor;
+	    icon.alpha = statusAlpha;
+            bg.drawRoundedRect(icon.x + 1, icon.y + 1, w - 2, w - 2, 2);
+            this.effects.addChild(icon);
+	}
+    }
+
+    // Draw overlay effect
+    if ( this.data.overlayEffect ) {
+	let overlayAlpha = game.settings.get("coloredeffects", "overlayAlpha");
+	let overlayColor = colorStringToHex(game.settings.get("coloredeffects", "overlayColor"));
+	let tex = await loadTexture(this.data.overlayEffect);
+	let icon = new PIXI.Sprite(tex),
+            size = Math.min(this.w * 0.6, this.h * 0.6);
+	icon.width = icon.height = size;
+	icon.position.set((this.w - size) / 2, (this.h - size) / 2);
+	icon.alpha = overlayAlpha;
+	icon.tint = overlayColor;
+	this.effects.addChild(icon);
+    }
+}
+
+function registerSettings() {
+
+    game.settings.register("coloredeffects", "overlayColor", {
+	name: game.i18n.localize("coloredeffects.overlayColor.name"),
+	hint: game.i18n.localize("coloredeffects.overlayColor.hint"),
+	scope: "world",
+	config: true,
+	default: "ffffff",
+	type: String
+    });
+    game.settings.register("coloredeffects", "overlayAlpha", {
+	name: game.i18n.localize("coloredeffects.overlayAlpha.name"),
+	hint: game.i18n.localize("coloredeffects.overlayAlpha.hint"),
+	scope: "world",
+	config: true,
+	type: Number,
+	range: {
+	    min: 0.0,
+	    max: 1.0,
+	    step: 0.01
+	},
+	default: 0.8
+    });
+    game.settings.register("coloredeffects", "statusBackgroundColor", {
+	name: game.i18n.localize("coloredeffects.statusBackgroundColor.name"),
+	hint: game.i18n.localize("coloredeffects.statusBackgroundColor.hint"),
+	scope: "world",
+	config: true,
+	default: "000000",
+	type: String
+    });
+    game.settings.register("coloredeffects", "statusBackgroundAlpha", {
+	name: game.i18n.localize("coloredeffects.statusBackgroundAlpha.name"),
+	hint: game.i18n.localize("coloredeffects.statusBackgroundAlpha.hint"),
+	scope: "world",
+	config: true,
+	type: Number,
+	range: {
+	    min: 0.0,
+	    max: 1.0,
+	    step: 0.01
+	},
+	default: 0.4
+    });
+    game.settings.register("coloredeffects", "statusBorderColor", {
+	name: game.i18n.localize("coloredeffects.statusBorderColor.name"),
+	hint: game.i18n.localize("coloredeffects.statusBorderColor.hint"),
+	scope: "world",
+	config: true,
+	default: "000000",
+	type: String
+    });
+    game.settings.register("coloredeffects", "statusBorderWidth", {
+	name: game.i18n.localize("coloredeffects.statusBorderWidth.name"),
+	hint: game.i18n.localize("coloredeffects.statusBorderWidth.hint"),
+	scope: "world",
+	config: true,
+	default: 1,
+	type: Number
+    });
+    game.settings.register("coloredeffects", "statusColor", {
+	name: game.i18n.localize("coloredeffects.statusColor.name"),
+	hint: game.i18n.localize("coloredeffects.statusColor.hint"),
+	scope: "world",
+	config: true,
+	default: "000000",
+	type: String
+    });
+    game.settings.register("coloredeffects", "statusAlpha", {
+	name: game.i18n.localize("coloredeffects.statusAlpha.name"),
+	hint: game.i18n.localize("coloredeffects.statusAlpha.hint"),
+	scope: "world",
+	config: true,
+	type: Number,
+	range: {
+	    min: 0.0,
+	    max: 1.0,
+	    step: 0.01
+	},
+	default: 1.0
+    });
+}
+
+Hooks.once("init", () => {
+    registerSettings();
+});
