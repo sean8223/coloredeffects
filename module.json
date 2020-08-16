@@ -3,7 +3,7 @@
     "title": "Colored Effects",
     "description": "Adds settings to control the display of status and overlay icons on tokens",
     "author": "Sean Wellington",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "minimumCoreVersion": "0.6.5",
     "compatibleCoreVersion": "0.6.5",
     "esmodules": [

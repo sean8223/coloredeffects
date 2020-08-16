@@ -132,3 +132,10 @@ function registerSettings() {
 Hooks.once("init", () => {
     registerSettings();
 });
+
+Hooks.on("closeSettingsConfig", () => {
+    let ownedTokens = canvas.getLayer("TokenLayer").ownedTokens;
+    for (let t of ownedTokens) {
+	t.drawEffects();
+    }
+});
