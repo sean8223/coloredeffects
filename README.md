@@ -7,9 +7,10 @@ For overlay icons, user-defined color and opacity settings are available. For st
 
 ## How to Use
 
-Install the module and open the Game Settings window. Click "Configure Settings" and select the "Module Settings" tab. You will see options fo the various color properties for icons under the "Colored Effects" menu. Modify them as you see fit, and click "Save Changes".
+Install the module and open the Game Settings window. Click "Configure Settings" and select the "Module Settings" tab. You will see options for the various color properties for icons under the "Colored Effects" menu. Modify them as you see fit, and click "Save Changes".
 
 ## Changelog
 
 * 0.0.1: Initial Release
 * 0.0.2: Added hook to redraw tokens on change of settings; updated README.
+* 0.0.3: No functional changes, updated manifest to indicate compatibility with FoundryVTT release 0.6.6.
