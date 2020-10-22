@@ -1,49 +1,45 @@
-Token.prototype.drawEffects = async function() {
-
-    this.effects.removeChildren().forEach(c => c.destroy());
-
-    // Draw status effects
-    if (this.data.effects.length > 0 ) {
-
-	// Determine the grid sizing for each effect icon
-	let w = Math.round(canvas.dimensions.size / 2 / 5) * 2;
-
-	// Draw a background Graphics object
-	let bgColor = colorStringToHex(game.settings.get("coloredeffects", "statusBackgroundColor"));
-	let bgAlpha = game.settings.get("coloredeffects", "statusBackgroundAlpha");
-	let bgBorderWidth = game.settings.get("coloredeffects", "statusBorderWidth");
-	let bgBorderColor = colorStringToHex(game.settings.get("coloredeffects", "statusBorderColor"));
-	let bg = this.effects.addChild(new PIXI.Graphics()).beginFill(bgColor, bgAlpha).lineStyle(bgBorderWidth, bgBorderColor);
-
-	// Draw each effect icon
-	let statusColor = colorStringToHex(game.settings.get("coloredeffects", "statusColor"));
-	let statusAlpha = game.settings.get("coloredeffects", "statusAlpha");
-	for ( let [i, src] of this.data.effects.entries() ) {
-            let tex = await loadTexture(src);
-            let icon = this.effects.addChild(new PIXI.Sprite(tex));
-            icon.width = icon.height = w;
-            icon.x = Math.floor(i / 5) * w;
-            icon.y = (i % 5) * w;
-            icon.tint = statusColor;
-	    icon.alpha = statusAlpha;
-            bg.drawRoundedRect(icon.x + 1, icon.y + 1, w - 2, w - 2, 2);
-            this.effects.addChild(icon);
-	}
+Token.prototype._drawOverlay = async function({src, tint}={}) {
+    if ( !src ) return;
+    let overlayAlpha = game.settings.get("coloredeffects", "overlayAlpha");
+    let overlayColor = colorStringToHex(game.settings.get("coloredeffects", "overlayColor"));
+    const tex = await loadTexture(src);
+    const icon = new PIXI.Sprite(tex);
+    const size = Math.min(this.w * 0.6, this.h * 0.6);
+    icon.width = icon.height = size;
+    icon.position.set((this.w - size) / 2, (this.h - size) / 2);
+    if ( tint ) {
+	icon.tint = tint;
+	icon.alpha = 0.80;
     }
-
-    // Draw overlay effect
-    if ( this.data.overlayEffect ) {
-	let overlayAlpha = game.settings.get("coloredeffects", "overlayAlpha");
-	let overlayColor = colorStringToHex(game.settings.get("coloredeffects", "overlayColor"));
-	let tex = await loadTexture(this.data.overlayEffect);
-	let icon = new PIXI.Sprite(tex),
-            size = Math.min(this.w * 0.6, this.h * 0.6);
-	icon.width = icon.height = size;
-	icon.position.set((this.w - size) / 2, (this.h - size) / 2);
-	icon.alpha = overlayAlpha;
+    else {
 	icon.tint = overlayColor;
-	this.effects.addChild(icon);
+	icon.alpha = overlayAlpha;
     }
+    this.effects.addChild(icon);
+}
+
+Token.prototype._drawEffect = async function(src, i, bg, w, tint) {
+    let statusColor = colorStringToHex(game.settings.get("coloredeffects", "statusColor"));
+    let statusAlpha = game.settings.get("coloredeffects", "statusAlpha");
+    let bgColor = colorStringToHex(game.settings.get("coloredeffects", "statusBackgroundColor"));
+    let bgAlpha = game.settings.get("coloredeffects", "statusBackgroundAlpha");
+    let bgBorderWidth = game.settings.get("coloredeffects", "statusBorderWidth");
+    let bgBorderColor = colorStringToHex(game.settings.get("coloredeffects", "statusBorderColor"));
+    bg.beginFill(bgColor, bgAlpha).lineStyle(bgBorderWidth, bgBorderColor);
+    let tex = await loadTexture(src);
+    let icon = this.effects.addChild(new PIXI.Sprite(tex));
+    icon.width = icon.height = w;
+    icon.x = Math.floor(i / 5) * w;
+    icon.y = (i % 5) * w;
+    if ( tint ) {
+	icon.tint = tint;
+    }
+    else {
+	icon.tint = statusColor;
+	icon.alpha = statusAlpha;
+    }
+    bg.drawRoundedRect(icon.x + 1, icon.y + 1, w - 2, w - 2, 2);
+    this.effects.addChild(icon);
 }
 
 function registerSettings() {
