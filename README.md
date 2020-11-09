@@ -11,8 +11,8 @@ Install the module and open the Game Settings window. Click "Configure Settings"
 
 ## Changelog
 
-* 0.0.1: Initial Release
+* 0.0.1: Initial Release.
 * 0.0.2: Added hook to redraw tokens on change of settings; updated README.
 * 0.0.3: No functional changes, updated manifest to indicate compatibility with FoundryVTT release 0.6.6.
-* 0.0.4: Refactored to support 0.7.5
-
+* 0.0.4: Refactored to support 0.7.5.
+* 0.0.5: No functional changes, updated manifest to indicate compatibility with FoundryVTT release 0.7.6.
