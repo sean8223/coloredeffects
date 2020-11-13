@@ -16,3 +16,4 @@ Install the module and open the Game Settings window. Click "Configure Settings"
 * 0.0.3: No functional changes, updated manifest to indicate compatibility with FoundryVTT release 0.6.6.
 * 0.0.4: Refactored to support 0.7.5.
 * 0.0.5: No functional changes, updated manifest to indicate compatibility with FoundryVTT release 0.7.6.
+* 0.0.6: No functional changes, updated manifest to indicate compatibility with FoundryVTT release 0.7.7.
