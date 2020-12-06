@@ -3,9 +3,9 @@
     "title": "Colored Effects",
     "description": "Adds settings to control the display of status and overlay icons on tokens",
     "author": "Sean Wellington",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "minimumCoreVersion": "0.7.5",
-    "compatibleCoreVersion": "0.7.7",
+    "compatibleCoreVersion": "0.7.8",
     "esmodules": [
 	"module/coloredeffects.js"
     ],
